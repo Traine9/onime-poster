@@ -1,6 +1,7 @@
 <?php
 require __DIR__ .'/include.php';
-define('DEBUG', $_GET['DEBUG']);
+define('DEBUG', (bool) $_GET['DEBUG']);
+print "DEBUG: " . (DEBUG ? 'true' : 'false');
 
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
