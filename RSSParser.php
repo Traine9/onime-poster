@@ -55,7 +55,7 @@ class RSSParser
         $lastDateOld = $this->getLastDate();
         $lastDate = false;
         $items = array_reverse($data['channel']['item']);
-        if (DEBUG) {
+        if (isDebug()) {
             print "START CYCLE\n";
         }
         foreach ($items as $item) {
@@ -84,7 +84,7 @@ class RSSParser
                 'caption' => $caption,
                 'parse_mode' => 'MarkdownV2'
             ]);
-            if (DEBUG) {
+            if (isDebug()) {
                 print_r([
                     'chat_id' => self::CHAT_ID,
                     'photo'   => $imageUrl,

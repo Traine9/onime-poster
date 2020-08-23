@@ -1,7 +1,9 @@
 <?php
 require __DIR__ . '/vendor/autoload.php';
 require __DIR__ .'/RSSParser.php';
-define('DEBUG', false);
+$config = [
+    'DEBUG' => false
+];
 function getConnection() : ?PDO
 {
     static $conn = null;
@@ -38,3 +40,13 @@ function getTelegramBot() : \Longman\TelegramBot\Telegram
     }
     return $telegram;
 }
+
+function isDebug() {
+    global $config;
+    return (bool) $config['DEBUG'];
+}
+function enableDebug() {
+    global $config;
+    $config['DEBUG'] = true;
+}
+
