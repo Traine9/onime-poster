@@ -15,6 +15,8 @@ try {
   echo "Connection failed: " . $e->getMessage();
 }
 
-$lastDate = current($conn->query('SELECT value FROM value WHERE id = 1', PDO::FETCH_ASSOC));
-
+$lastDate = $conn->query('SELECT value FROM value WHERE id = 1', PDO::FETCH_ASSOC);
+foreach ($lastDate as $l) {
+    print_r($l);
+}
 print_r($lastDate);
