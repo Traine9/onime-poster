@@ -10,10 +10,11 @@ try {
   $conn = new PDO("mysql:host=$servername;dbname=fdg8hfjnr3bnca2t", $username, $password);
   // set the PDO error mode to exception
   $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-  echo "Connected successfully";
+ // echo "Connected successfully";
 } catch(PDOException $e) {
   echo "Connection failed: " . $e->getMessage();
 }
 
-$lastDate = $conn->query('SELECT value FROM value WHERE id =1');
+$lastDate = $conn->query('SELECT value FROM value WHERE id = 1', PDO::FETCH_ASSOC)[0];
+
 print_r($lastDate);
