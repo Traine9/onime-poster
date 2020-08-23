@@ -55,6 +55,9 @@ class RSSParser
         $lastDateOld = $this->getLastDate();
         $lastDate = false;
         $items = array_reverse($data['channel']['item']);
+        if (DEBUG) {
+            print "START CYCLE\n";
+        }
         foreach ($items as $item) {
             $pubDate = new DateTime($item['pubDate']);
             if (!$lastDate || $pubDate > $lastDate) {
