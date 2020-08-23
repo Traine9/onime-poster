@@ -84,7 +84,7 @@ class RSSParser
                 'chat_id' => self::CHAT_ID,
                 'photo'   => $imageUrl,
                 'caption' => $caption,
-                'parse_mode' => 'HTML '
+                'parse_mode' => 'HTML'
             ]);
             if (isDebug()) {
                 print_r([
