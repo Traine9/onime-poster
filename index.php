@@ -3,8 +3,8 @@ require __DIR__ . '/vendor/autoload.php';
 use Kreait\Firebase\Factory;
 
 $servername = "f80b6byii2vwv8cx.chr7pe7iynqr.eu-west-1.rds.amazonaws.com";
-$username = "wrdo12m7ecr8u77p";
-$password = "password";
+$username = "hku897wey7x2hefz";
+$password = "wrdo12m7ecr8u77p";
 
 try {
   $conn = new PDO("mysql:host=$servername;dbname=fdg8hfjnr3bnca2t", $username, $password);
