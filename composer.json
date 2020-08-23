@@ -1,0 +1,12 @@
+{
+    "name": "bond/onime-poster",
+    "authors": [
+        {
+            "name": "Bond",
+            "email": "bond-d@ukr.net"
+        }
+    ],
+    "require": {
+        "kreait/firebase-php": "5.0"
+    }
+}
