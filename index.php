@@ -1,22 +1,39 @@
 <?php
 require __DIR__ . '/vendor/autoload.php';
-use Kreait\Firebase\Factory;
+function getConnection() : ?PDO
+{
+    static $conn = null;
+    if (!$conn) {
+        $servername = "f80b6byii2vwv8cx.chr7pe7iynqr.eu-west-1.rds.amazonaws.com";
+        $username = "hku897wey7x2hefz";
+        $password = "wrdo12m7ecr8u77p";
 
-$servername = "f80b6byii2vwv8cx.chr7pe7iynqr.eu-west-1.rds.amazonaws.com";
-$username = "hku897wey7x2hefz";
-$password = "wrdo12m7ecr8u77p";
-
-try {
-  $conn = new PDO("mysql:host=$servername;dbname=fdg8hfjnr3bnca2t", $username, $password);
-  // set the PDO error mode to exception
-  $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-  echo "Connected successfully";
-} catch(PDOException $e) {
-  echo "Connection failed: " . $e->getMessage();
+        try {
+            $conn = new PDO("mysql:host=$servername;dbname=fdg8hfjnr3bnca2t", $username, $password);
+            // set the PDO error mode to exception
+            $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            //echo "Connected successfully";
+        } catch(PDOException $e) {
+            $conn = null;
+            //echo "Connection failed: " . $e->getMessage();
+        }
+    }
+    return $conn;
 }
 
-$lastDate = $conn->query('SELECT value FROM value WHERE id = 1', PDO::FETCH_ASSOC);
-foreach ($lastDate as $l) {
-    print_r($l);
+function getTelegramBot() : \Longman\TelegramBot\Telegram
+{
+    $bot_api_key  = '1286970428:AAE2bqouLajOSa7wbUtGyxU0ymXljQKQQUs';
+    $bot_username = 'AnimePosterBot';
+
+    try {
+        // Create Telegram API object
+        $telegram = new Longman\TelegramBot\Telegram($bot_api_key, $bot_username);
+
+    } catch (Longman\TelegramBot\Exception\TelegramException $e) {
+        // log telegram errors
+        // echo $e->getMessage();
+    }
+    return $telegram;
 }
-print_r($lastDate);
+(new RSSParser(getConnection(), getTelegramBot()))->processRSS();
