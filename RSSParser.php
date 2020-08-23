@@ -78,7 +78,7 @@ class RSSParser
             $urlOriginal = $parsedUrl['scheme'] . '://' . 'animevost.org' . $parsedUrl['path'];
             $caption =  $title
                 . "\n" . "[Animveost]($urlOriginal)" . " | [Mirror]($url)";
-            $caption = addcslashes($caption, "_*`[");
+            $caption = addcslashes($caption, "_*`[-");
             $result = \Longman\TelegramBot\Request::sendPhoto([
                 'chat_id' => self::CHAT_ID,
                 'photo'   => $imageUrl,
