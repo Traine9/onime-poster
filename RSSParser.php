@@ -72,10 +72,13 @@ class RSSParser
             $imageUrl = $r[1];
             $parsedUrl = parse_url($url);
             $imageUrl = $parsedUrl['scheme'] . '://' . $parsedUrl['host'] . $imageUrl;
+            $urlOriginal = $parsedUrl['scheme'] . '://' . 'animevost.org' . $parsedUrl['path'];
             \Longman\TelegramBot\Request::sendPhoto([
                 'chat_id' => self::CHAT_ID,
                 'photo'   => $imageUrl,
-                'caption' => $title . "\n" . $url
+                'caption' => $title
+                    . "\n" .'Animveost:' . $urlOriginal
+                    . "\n" .'Mirror:' . $url
             ]);
 
 
