@@ -37,7 +37,7 @@ class RSSParser
     public function updateLastDate(DateTime $lastDate)
     {
         $statement = $this->connection->prepare('UPDATE value SET value=:value WHERE id = 1');
-        $statement->execute([$lastDate->format('Y-m-d H:i:s')]);
+        $statement->execute(['value' => $lastDate->format('Y-m-d H:i:s')]);
     }
 
     public function getRSSArray()
@@ -54,9 +54,11 @@ class RSSParser
         $data = $this->getRSSArray();
         $lastDateOld = $this->getLastDate();
         $lastDate = false;
-        foreach ($data['channel']['item'] as $item) {
-            if (!$lastDate) {
-                $lastDate = new DateTime($item['pubDate']);
+        $items = array_reverse($data['channel']['item']);
+        foreach ($items as $item) {
+            $pubDate = new DateTime($item['pubDate']);
+            if (!$lastDate || $pubDate > $lastDate) {
+                $lastDate = $pubDate;
             }
             if ($lastDate <= $lastDateOld) {
                 continue;
