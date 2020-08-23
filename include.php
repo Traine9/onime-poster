@@ -1,6 +1,7 @@
 <?php
 require __DIR__ . '/vendor/autoload.php';
 require __DIR__ .'/RSSParser.php';
+define('DEBUG', false);
 function getConnection() : ?PDO
 {
     static $conn = null;

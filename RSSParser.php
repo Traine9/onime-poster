@@ -37,7 +37,7 @@ class RSSParser
     public function updateLastDate(DateTime $lastDate)
     {
         $statement = $this->connection->prepare('UPDATE value SET value=:value WHERE id = 1');
-        $statement->execute(['value' => $lastDate->format('Y-m-d H:i:s')]);
+        $statement->execute(['value' => $lastDate->format('c')]);
     }
 
     public function getRSSArray()
@@ -73,18 +73,28 @@ class RSSParser
             $parsedUrl = parse_url($url);
             $imageUrl = $parsedUrl['scheme'] . '://' . $parsedUrl['host'] . $imageUrl;
             $urlOriginal = $parsedUrl['scheme'] . '://' . 'animevost.org' . $parsedUrl['path'];
-            \Longman\TelegramBot\Request::sendPhoto([
+            $caption =  $title
+                . "\n" .'Animveost:' . $urlOriginal
+                . "\n" .'Mirror:' . $url;
+            $result = \Longman\TelegramBot\Request::sendPhoto([
                 'chat_id' => self::CHAT_ID,
                 'photo'   => $imageUrl,
-                'caption' => $title
-                    . "\n" .'Animveost:' . $urlOriginal
-                    . "\n" .'Mirror:' . $url
+                'caption' => $caption
             ]);
+            if (DEBUG) {
+                print_r([
+                    'chat_id' => self::CHAT_ID,
+                    'photo'   => $imageUrl,
+                    'caption' => $caption
+                ]);
+                print_r($result);
+                exit();
+            }
 
 
         }
-        $this->updateLastDate($lastDate);
+        if ($lastDate) {
+            $this->updateLastDate($lastDate);
+        }
     }
-
-
 }
