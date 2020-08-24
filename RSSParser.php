@@ -78,6 +78,7 @@ class RSSParser
             $urlOriginal = $parsedUrl['scheme'] . '://' . 'animevost.org' . $parsedUrl['path'];
             $urlText = '<a href="' . $urlOriginal . '">AnimeVost</a>';
             $urlText .= ' | <a href="' . $url . '">Mirror</a>';
+            $urlText .= ' ' . $pubDate->format('d-m');
             $caption =  htmlspecialchars($title)
                 . "\n" . $urlText;
             $result = \Longman\TelegramBot\Request::sendPhoto([
