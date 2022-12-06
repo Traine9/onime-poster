@@ -18,7 +18,7 @@ class RSSParser
      * @param PDO $connection
      * @param Telegram $telegramBot
      */
-    public function __construct(PDO $connection, Telegram $telegramBot)
+    public function __construct(?PDO $connection, Telegram $telegramBot)
     {
         $this->connection = $connection;
         $this->telegramBot = $telegramBot;
@@ -26,18 +26,14 @@ class RSSParser
 
     public function getLastDate(): DateTime
     {
-        $lastDate = $this->connection->query('SELECT value FROM value WHERE id = 1', PDO::FETCH_ASSOC);
-        foreach ($lastDate as $l) {
-            $lastDate = $l['value'];
-        }
+        $lastDate = DateTime::createFromFormat('Y-m-d H:i:s', file_get_contents(__DIR__.'/date.txt'));
 
-        return new DateTime($lastDate);
+        return $lastDate ?: new DateTime();
     }
 
     public function updateLastDate(DateTime $lastDate)
     {
-        $statement = $this->connection->prepare('UPDATE value SET value=:value WHERE id = 1');
-        $statement->execute(['value' => $lastDate->format('c')]);
+        file_put_contents(__DIR__.'/date.txt', $lastDate->format('Y-m-d H:i:s'));
     }
 
     public function getRSSArray()

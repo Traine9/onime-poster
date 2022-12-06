@@ -1,0 +1,52 @@
+.table {
+    display: inline-grid;
+    grid-template-areas: "hd hd hd hd hd hd hd";
+    grid-template-columns: repeat(7, minmax(1px, 1fr));
+    grid-template-rows: repeat(7, minmax(1px, 1fr));
+    padding: 0;
+    margin: 0;
+    border-spacing: 0;
+    border-style: solid;
+    border-color: black;
+}
+
+.row {
+    color: black;
+    align-content: center;
+
+}
+
+.cell {
+    border-style: dotted;
+    border-width: thin;
+}
+
+.day {
+    background-color: rgb(35, 37, 70);
+    color: rgb(200, 190, 240);
+}
+
+.header {
+    text-align: center;
+    grid-area: hd;
+    font-weight: bold;
+    background-color: rgb(170, 170, 200);
+}
+
+
+.link {
+    color: blue;
+    text-decoration-line: underline;
+}
+
+.special {
+    background-color: rgb(250, 120, 120);
+}
+.weekend {
+    background-color: rgb(255, 220, 220);
+}
+
+.inactive {
+    color: grey;
+    background-color: lightgrey;
+}
