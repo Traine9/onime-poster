@@ -10,6 +10,7 @@
         "ext-pdo": "*",
         "longman/telegram-bot": "^0.80.0",
         "ext-simplexml": "*",
-        "ext-json": "*"
+        "ext-json": "*",
+        "nesbot/carbon": "^2.64"
     }
 }

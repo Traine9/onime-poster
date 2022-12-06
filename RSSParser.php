@@ -28,7 +28,7 @@ class RSSParser
     {
         $lastDate = DateTime::createFromFormat('Y-m-d H:i:s', file_get_contents(__DIR__.'/date.txt'));
 
-        return $lastDate ?: new DateTime();
+        return $lastDate ?: \Carbon\Carbon::now()->startOfDay();
     }
 
     public function updateLastDate(DateTime $lastDate)
